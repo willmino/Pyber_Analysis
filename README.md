@@ -63,7 +63,110 @@ Our first deliverable was then displayed in our jupyter notebook file as below.
 
 ![Deliverable #1 Summary table](https://github.com/willmino/Pyber_Analysis/blob/main/Deliverable_1.png)
 
+### Deliverable #2 
 
+The second deliverable in our report for V. Isualize was a multiple line plot. We wanted this line plot to exhibit the total ride-sharing fares per week for each type of city. 
+
+We grouped the the merged pyber_data_df dataframe by "type" and "date". We performed the sum() aggregation function on this grouped dataframe and displayed only the "fare" column. We set this equal to the fare_by_date grouped dataframe. This was achieved with the code: 
+
+`fare_by_date = pyber_data_df.groupby(["type","date"]).sum()["fare"]`
+
+We then reset the index for this new grouped dataframe by running the code
+
+`fare_by_date = fare_by_date.reset_index()`. 
+
+This primed the data for compatibility with the pivot() function.
+
+We then set the new variable for our pivot table `fare_by_pivot_table` equal to the `fare_by_date` dataframe with the `.pivot()` function applied using "date" for the index parameter, "type" for the columns parameter, and "fare" for the values parameter. We now had access to our pivot table. This was accomplished in the line of code:
+`fare_by_date_pivot = fare_by_date.pivot(index = "date", columns = "type", values = "fare")`
+
+We used the `.loc[]` function to have our pivot table only include rows of data with the dates between `2019-01-01` and `2019-04-28`. The line of code for this was:
+
+`fare_by_date_pivot_df = fare_by_date_pivot.loc['2019-01-01':'2019-04-28']`.
+
+Almost finished with the analysis, we converted the "date" index of our pivot table to a datetime datatype by using the code:
+
+`fare_by_date_pivot_df.index = pd.to_datetime(fare_by_date_pivot_df.index)`. 
+
+The last step of our analysis before plotting the data was to resample the pivot table `fare_by_week_pivot_df` was to resample the dates in the table by weeks. To accomplish this, we applied the `.resample()` function to the pivot table, and included the "W" parameter for the date resampling method. We finally applied the `.sum()` function to get the sum of the fares for each week.
+`fare_by_week_pivot_df = fare_by_date_pivot_df.resample("W").sum()`
+
+Finally, we had the data necessary for constructing our multiple line plot. We used the object oriented method in matplotlib to generate our overlayed line plot.
+The following block of included code was used to generate Deliverable #2:
+
+`from matplotlib import style`
+
+`style.use('fivethirtyeight')`
+
+`fix, ax = plt.subplots(figsize = (16,5.5))`
+
+
+`timestamps = fare_by_week_pivot_df.index`
+
+Note that for the below code, I extracted the list of weeks from the indexed `fare_by_week_pivot_df` dataframe. These elements for weeks were converted to strings We then iterated through the list of weeks and located character position `[5:7]` to return the month from the string. The numbers for the month were appended to to the `months` list. Later on in the code, I used the code for `len(months)` to get the number of elements in the list to eventually be used in the calculation for the increments of the xticks on the x-axis of the final figure. We believed this was performed pythonically so that any given csv input could find out how many months we wanted to include in a plotted chart. This was a more sophisticated way as opposed to manually entering the number of each month into the `xvalues` for the tick locations.
+
+`weeks = timestamps.astype(str).tolist()`
+`months = []`
+
+`for i in weeks:`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`if i[5:7] not in months:`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`months.append(i[5:7])`
+
+
+
+`xlabels = ("Jan\n2019", "Feb", "Mar", "Apr")`
+
+The code below was used to plot the cotents of the final pivot table.
+
+`ax.plot(fare_by_week_pivot_df)`
+
+
+
+`ax.set_title("Total Fare by City Type")`
+
+`ax.set_ylabel("Fare($USD)")`
+
+The actual location of the x-ticks was acquired using the below code `ax.get_xticks()` and the resulting array was stored in a list of values. The values were then converted to integers so they could be used in the later `np.arange()` function.
+
+`lists = ax.get_xticks().tolist()`
+
+`intlist = []`
+
+`for i in lists:`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`i = int(i)`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`intlist.append(i)`
+
+
+`start = min(intlist)`
+
+`end = max(intlist)`
+
+`increments = int((end-start)/len(months))` 
+
+The `np.arange()` function was necessary to reformat the default x-tick positions to a more preferable format.
+
+`xaxis = np.arange(start,end,increments)`
+
+List comprehension was used to extract the range of x-tick position values into a list.
+
+`xvalues = [value for value in xaxis]`
+
+
+`ax.set_xticks(xaxis)`
+
+`ax.set(xticklabels = xlabels)`
+
+`ax.legend(labels = ["Rural","Suburban", "Urban"], loc = "center")`
+
+`plt.tight_layout()`
+
+`plt.savefig("analysis/PyBer_fare_summary.png")`
+
+![Deliverable #2: Total Fare by City Type](https://github.com/willmino/Pyber_Analysis/blob/main/analysis/PyBer_fare_summary.png)
 
 
 
