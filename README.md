@@ -59,9 +59,7 @@ Finally, the designated dataframe columns with fare values were formatted with `
 
 `pyber_summary_df`
 
-Our first deliverable was then displayed in our jupyter notebook file as below.
-
-![Deliverable #1 Summary table](https://github.com/willmino/Pyber_Analysis/blob/main/Deliverable_1.png)
+Our first deliverable was then displayed in our jupyter notebook file.
 
 ### Deliverable #2 
 
@@ -173,7 +171,15 @@ List comprehension was used to extract the range of x-tick position values into 
 ## Results
 
 
+From January to April 2019, we observed that Urban cities exhibited the highest number of total rides at 1625, total drivers at 2405, and highest total fares at $39.854.38. This makes sense because Urban cities tend to have a higher population density than Rural and Suburban cities. It also was logical that Rural cities, with their generally low population densities, had the lowest number of total rides at 125, lowest number of total drivers at 78, and lowest total fares at $4327.93. What also made sense was the highest average fare per ride at $34.62 for the Rural cities. This was logical because drivers are generally less likely to operate in Rural areas where there are less crowds of people waiting for transportation. Thus, the supply of rides in these areas causes the average fare per ride price to increase. Again, the higher average fare per driver at $55.49 for Rural areas makes sense because there are less available drivers and thus the denominator for making this calculation is lower. When dividing a sum by a lower denominator, you generally get a higher value. The lowest average fare per ride in Urban cities at $24.53 per ride makes sense because there is a supply of rides in this area. Thus, the higher supply will drive the price down. In line with the earlier algebraic logic, the lowest average fare per driver was in Urban cities because the higher availability of drivers contributes to a greater denominator in this calculation. When dividing by a greater denominator, such as more available drivers, you will get a lower value.
 
+
+![Deliverable #1 Summary table](https://github.com/willmino/Pyber_Analysis/blob/main/Deliverable_1.png)
+
+
+Looking at our multiple line chart plot for each city type, we can see that urban cities generally have the highest total fare per week at a value ranging above $1500 total fares per week and below $2500 total fares per week throughout the months of January through April. Predictably, Rural cities have the lowest fares per week at about less than $500 total fares per week. Suburban cities range from above $500 total fares per week to below $1500 total fares per week. 
+
+![Deliverable #2: Total Fare by City Type](https://github.com/willmino/Pyber_Analysis/blob/main/analysis/PyBer_fare_summary.png)
 
 ## Summary
 
