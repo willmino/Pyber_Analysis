@@ -153,6 +153,9 @@ List comprehension was used to extract the range of x-tick position values into 
 
 `xvalues = [value for value in xaxis]`
 
+`xaxis[0] = xaxis[0]+5`
+
+`ax.set_xlim(737176,737177)`
 
 `ax.set_xticks(xaxis)`
 
