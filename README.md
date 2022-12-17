@@ -167,7 +167,6 @@ List comprehension was used to extract the range of x-tick position values into 
 
 `plt.savefig("analysis/PyBer_fare_summary.png")`
 
-![Deliverable #2: Total Fare by City Type](https://github.com/willmino/Pyber_Analysis/blob/main/analysis/PyBer_fare_summary.png)
 
 
 
@@ -182,7 +181,7 @@ From January to April 2019, we observed that Urban cities exhibited the highest 
 
 Looking at our multiple line chart plot for each city type, we can see that urban cities generally have the highest total fare per week at a value ranging above $1500 total fares per week and below $2500 total fares per week throughout the months of January through April. Predictably, Rural cities have the lowest fares per week at about less than $500 total fares per week. Suburban cities range from above $500 total fares per week to below $1500 total fares per week. 
 
-![Deliverable #2: Total Fare by City Type](https://github.com/willmino/Pyber_Analysis/blob/main/analysis/PyBer_fare_summary.png)
+![Deliverable #2: Total Fare by City Type](https://github.com/willmino/Pyber_Analysis/blob/main/analysis/Pyber_fare_summary.png)
 
 ## Summary
 
