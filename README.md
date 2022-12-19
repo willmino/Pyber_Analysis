@@ -1,18 +1,18 @@
 # Pyber_Analysis
 ## Overview
 
-After landing a job at Pyber, a Python-based ride-sharing company, Omar and I were tasked with generating some import summary figures for ride-sharing data from 2019. We want to impress the CEO V. Isualize by ensuring our analytical work is comprehensive and correct. 
+After landing a job at Pyber, a Python-based ride-sharing company, Omar and I were tasked with generating some import summary figures for ride-sharing data from 2019. We wanted to impress the CEO, V. Isualize, by ensuring our analytical work was comprehensive and correct. 
 
 ## Purpose
 
-We are tasked with generating summary figures for the ride-sharing data in pandas dataframes format using the matplotlib library for impressive data visualizations. First, we need to generate dataframes for each city type within our data (Rural, Suburban, and Urban). Then, we need to retrieve summary statistics from these data, such as the total number of rides, number of drivers, and sum of the fares from each city type. We will then perform calculations to generate relevant statistics such as the average fare per ride for each city type and the average fare per driver for each city type. Further data structuring in dataframes and indexing allowed us to generate the code using the matplotlib library to visualize the data.
+We were tasked with generating summary figures for the ride-sharing data in pandas dataframes format using the matplotlib library for impressive data visualizations. First, we needed to generate dataframes for each city type within our data (Rural, Suburban, and Urban). Then, we needed to retrieve summary statistics from these data, such as the total number of rides, number of drivers, and sum of the fares from each city type. We then performed calculations to generate relevant statistics such as the average fare per ride for each city type and the average fare per driver for each city type. Further data structuring in dataframes and indexing allowed us to generate the code using the matplotlib library to visualize the data.
 
 ## Analysis
-First, our pandas library (as pd) code `city_data_df = pd.read_csv("Resources/city_data.csv")` and `ride_data_df = pd.read_csv("Resources/city_data.csv") ` was simultaneously used to open the necessary csv files and load them into their own pandas dataframes. The dataframes were subsequently merged into a single dataframe by the code:
+First, our pandas library (as pd) code `city_data_df = pd.read_csv("Resources/city_data.csv")` and `ride_data_df = pd.read_csv("Resources/city_data.csv") ` was used to simultaneously open the necessary csv files and load them into their own pandas dataframes. The dataframes were subsequently merged into a single dataframe by the code:
 
  `pyber_data_df = pd.merge(ride_data_df, city_data_df, how="left", on=["city", "city"])`.
 
- We generated statistics for the count of all rides per city type by grouping the `pyber_data_df` dataframe by `"type"`, performing a `count()` aggregation function, and designating to return only the `ride_id` column. This gave us the variable `rides_per_city_type`. This code was summarized as:
+ We generated a statistic for the count of all rides per city type by grouping the `pyber_data_df` dataframe by `"type"`, performing a `count()` aggregation function, and designating to return only the `ride_id` column. This gave us the variable `rides_per_city_type`. This code was summarized as:
 
  `rides_per_city_type = pyber_data_df.groupby(["type"]).count()["ride_id"]`.
 
@@ -31,7 +31,7 @@ Calculations were required to generate the the `average_fare_per_ride` and the `
 `average_fare_per_driver = fares_per_city_type/drivers_per_city_type`.
 
 We then took each of the series we generated and converted them to a dataframe using a general format. The dataframe conversion for the `average_fare_per_driver` series was performed by the code: `fare_per_driver_df = average_fare_per_driver.to_frame()`. 
-Our first key figure, Deliverable #1, was a summary table to include all of the statistics we generated.
+Our first key figure, Deliverable #1, was a summary table to include all of the statistics we generated. These two figures were paramount in helping us carry out our analysis to observe the discepancies in ride-sharing data among varying types of cities. We would soon begin to see how the economic environment and geographic qualities of the differing city types could influence these figures.
 ### Deliverable #1
 To make this first deliverable, we first set the summary dataframe equal to the first column: `pyber_summary_df = riders_df`. We then created a list of all the subsequent columns to add to the summary dataframe. 
 `dfs = [drivers_df, fares_df, fare_per_ride_df, fare_per_driver_df]`
@@ -176,7 +176,7 @@ List comprehension was used to extract the range of x-tick position values into 
 From January to April 2019, we observed that Urban cities exhibited the highest number of total rides at 1625, total drivers at 2405, and highest total fares at $39.854.38. This makes sense because Urban cities tend to have a higher population density than Rural and Suburban cities. It also was logical that Rural cities, with their generally low population densities, had the lowest number of total rides at 125, lowest number of total drivers at 78, and lowest total fares at $4327.93. What also made sense was the highest average fare per ride at $34.62 for the Rural cities. This was logical because drivers are generally less likely to operate in Rural areas where there are less crowds of people waiting for transportation. Thus, the supply of rides in these areas causes the average fare per ride price to increase. Again, the higher average fare per driver at $55.49 for Rural areas makes sense because there are less available drivers and thus the denominator for making this calculation is lower. When dividing a sum by a lower denominator, you generally get a higher value. The lowest average fare per ride in Urban cities at $24.53 per ride makes sense because there is a supply of rides in this area. Thus, the higher supply will drive the price down. In line with the earlier algebraic logic, the lowest average fare per driver was in Urban cities because the higher availability of drivers contributes to a greater denominator in this calculation. When dividing by a greater denominator, such as more available drivers, you will get a lower value.
 
 
-![Deliverable #1 Summary table](https://github.com/willmino/Pyber_Analysis/blob/main/Deliverable_1.png)
+![Deliverable #1 Summary table](https://github.com/willmino/Pyber_Analysis/blob/main/Deliverable1.png)
 
 
 Looking at our multiple line chart plot for each city type, we can see that urban cities generally have the highest total fare per week at a value ranging above $1500 total fares per week and below $2500 total fares per week throughout the months of January through April. Predictably, Rural cities have the lowest fares per week at about less than $500 total fares per week. Suburban cities range from above $500 total fares per week to below $1500 total fares per week. 
